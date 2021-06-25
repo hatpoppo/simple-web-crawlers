@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/hatpoppo/simple-web-crawlers#readme",
   "dependencies": {
-    "cheerio-httpcli": "^0.8.1",
-    "nedb": "^1.8.0",
-    "nedb-promise": "^2.0.1"
+    "iconv-lite": "^0.6.3",
+    "jquery": "^3.6.0",
+    "jsdom": "^16.6.0"
   }
 }

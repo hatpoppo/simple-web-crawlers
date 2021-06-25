@@ -1,10 +1,11 @@
 const https = require('https');
 const {JSDOM} = require("jsdom"); //jqueryをつかうために
 const jQuery = require("jquery"); //趣旨のとおり、DOM走査するために
+const iconv = require('iconv-lite');
 
 const options={
-  host:'www.digitalocean.com',
-  path:'/community/tags/api',
+  host:'futureys.tokyo',
+  path:'/how-permission-should-be-set-for-developing-inside-a-container-using-wsl-2/',
   method:'GET',
   Headers:{
     'Accept':'text/html,application/xhtml+xml,application/xml;'
@@ -18,24 +19,24 @@ let request = https.request(options, (res) => {
     return;
   }
 
-  let data = '';
+  let data = [];
 
   res.on('data', (chunk) => {
-    data += chunk;
+    data.push(chunk);
   });
 
   res.on('close', () => {
     console.log('Retrieved all data');
-    const dom = new JSDOM(data);
+    const decodedBody = iconv.decode(Buffer.concat(data), 'UTF8');
+    const dom = new JSDOM(decodedBody);
     const $ = jQuery(dom.window);
-    const $doc = $(dom.window.document);
-    const sample = $('ul.utility > li');
-    let items = $('.vList');
-    console.log(sample); 
+    const sample = $('.wp-block-table tr');
     sample.each(function(index){
-      console.log(index + ": " + $(this).text())
+      // console.log(index + ": " + $(this).text())
+      $(this).children().each(function(index1){
+        console.log(index + " " + index1 + ": " + $(this).text())
+      })
     })
-    console.log(items);
   });
 });
 
