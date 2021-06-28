@@ -3,12 +3,12 @@ const {JSDOM} = require("jsdom"); //jqueryをつかうために
 const jQuery = require("jquery"); //趣旨のとおり、DOM走査するために
 const iconv = require('iconv-lite');
 
-module.exports= function getTable(host,path,encording){
+module.exports= function getTable(param){
 
 
 const options={
-  host:host,
-  path:path,
+  host:param.host,
+  path:param.path,
   method:'GET',
   Headers:{
     'Accept':'text/html,application/xhtml+xml,application/xml;'
@@ -30,10 +30,10 @@ let request = https.request(options, (res) => {
 
   res.on('close', () => {
     console.log('Retrieved all data');
-    const decodedBody = iconv.decode(Buffer.concat(data), encording);
+    const decodedBody = iconv.decode(Buffer.concat(data), param.encoding);
     const dom = new JSDOM(decodedBody);
     const $ = jQuery(dom.window);
-    const sample = $('.wp-block-table tr');
+    const sample = $('.colortable tr');
     sample.each(function(index){
       // console.log(index + ": " + $(this).text())
       $(this).children().each(function(index1){

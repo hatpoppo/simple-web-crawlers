@@ -1,9 +1,17 @@
 ﻿const getTable = require('./getTable.js');
-// const option={
-//     host:'futureys.tokyo',
-//     path:'/how-permission-should-be-set-for-developing-inside-a-container-using-wsl-2/',
-//     encoding:'UTF8'
-// }
-// getTable(option)
-getTable('futureys.tokyo',
-'/how-permission-should-be-set-for-developing-inside-a-container-using-wsl-2/','UTF8');
+const options=[{
+    host:'www.colordic.org',
+    path:'',
+    encoding:'UTF8'
+},{
+    host:'www.colordic.org',
+    path:'/w',
+    encoding:'UTF8'
+},
+]
+for (const option of options) {
+    getTable(option)
+    
+}
+// getTable('futureys.tokyo',
+// '/how-permission-should-be-set-for-developing-inside-a-container-using-wsl-2/','UTF8');
